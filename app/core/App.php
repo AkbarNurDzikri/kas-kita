@@ -2,7 +2,7 @@
 
 class App
 {
-    protected $controller = 'kas_kita';
+    protected $controller = 'home';
     protected $method = 'index';
     protected $params = [];
 
