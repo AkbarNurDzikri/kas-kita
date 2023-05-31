@@ -19,7 +19,7 @@
   </head>
   <body>
     <div class="container my-3">
-      <!-- <h3 class="text-center mb-3">Kas Keluarga Kita<br><i class="bi bi-cash-coin text-muted"></i> (Kiki & Tita) <i class="bi bi-wallet2 text-muted"></i></h3> -->
+    <h3 class="text-center my-3"><i class="bi bi-cash-coin text-muted"></i> <u>KAS KELUARGA <?= strtoupper($_SESSION['userInfo']['username']) ?></u> <i class="bi bi-wallet2 text-muted"></i></h3>
 
       <hr>
 
@@ -65,10 +65,16 @@
             <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?= $data['kas'][0]['pengeluaran'] != NULL ? $data['kas'][0]['pengeluaran'] : $data['kas'][0]['pemasukan'] ?>" required>
           </div>
 
-          <a href="<?= BASEURL ?>" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+          <a href="<?= BASEURL . '/kas_kita' ?>" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
           <button type="submit" class="btn btn-primary btn-sm float-end">Update</button>
         </form>
         </div>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col">
+        <p class="small fixed-bottom">Copyright &copy 2023 Khalid System All Right Reserved</p>
       </div>
     </div>
 

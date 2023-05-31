@@ -19,7 +19,7 @@
   </head>
   <body>
     <div class="container">
-      <h3 class="text-center my-3">Kas Keluarga Kita<br><i class="bi bi-cash-coin text-muted"></i> (Kiki & Tita) <i class="bi bi-wallet2 text-muted"></i></h3>
+      <h3 class="text-center my-3"><i class="bi bi-cash-coin text-muted"></i> <u>KAS KELUARGA <?= strtoupper($_SESSION['userInfo']['username']) ?></u> <i class="bi bi-wallet2 text-muted"></i></h3>
       <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="pengeluaran-tab" data-bs-toggle="tab" data-bs-target="#pengeluaran-tab-pane" type="button" role="tab" aria-controls="pengeluaran-tab-pane" aria-selected="true">Pengeluaran</button>
@@ -36,6 +36,7 @@
         <!-- pengeluaran -->
         <div class="tab-pane fade show active" id="pengeluaran-tab-pane" role="tabpanel" aria-labelledby="pengeluaran-tab" tabindex="0">
           <button class="btn btn-primary btn-sm my-3" data-bs-toggle="modal" data-bs-target="#buatKas">Buat Catatan</button>
+          <a href="<?= BASEURL . '/auth/logout' ?>" class="btn btn-secondary btn-sm float-end my-3">Logout</a>
           <div class="card border-primary">
             <div class="card-body table-responsive">
               <table class="table table-striped caption-top" id="tablePengeluaran">
@@ -62,6 +63,7 @@
         <!-- pemasukan -->
         <div class="tab-pane fade" id="pemasukan-tab-pane" role="tabpanel" aria-labelledby="pemasukan-tab" tabindex="0">
           <button class="btn btn-primary btn-sm my-3" data-bs-toggle="modal" data-bs-target="#buatKas">Buat Catatan</button>
+          <a href="<?= BASEURL . '/auth/logout' ?>" class="btn btn-secondary btn-sm float-end my-3">Logout</a>
           <div class="card border-success">
             <div class="card-body table-responsive">
               <table class="table table-striped caption-top" id="tablePemasukan">
@@ -93,10 +95,11 @@
               <span class="input-group-text">s.d.</span>
               <input type="date" class="form-control" name="tglSelesaiLaporan" required>
             </div>
+            <a href="<?= BASEURL . '/auth/logout' ?>" class="btn btn-secondary btn-sm mt-2">Logout</a>
             <button type="submit" class="btn btn-primary btn-sm float-end mt-2">Show Data</button>
           </form>
           <br>
-          <div class="card border-dark my-4">
+          <div class="card border-dark">
             <div class="card-body table-responsive">
               <table class="table table-striped caption-top tableReport">
                 <caption class="textSaldo"></caption>
@@ -166,6 +169,12 @@
       </div>
     </div>
     <!-- Modal Kas -->
+
+    <div class="row text-center">
+      <div class="col">
+        <p class="small fixed-bottom">Copyright &copy 2023 Khalid System All Right Reserved</p>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="<?= BASEURL ?>/assets/datatables/datatables.min.js"></script>

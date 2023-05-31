@@ -1,5 +1,5 @@
 <div class="row my-3">
-  <div class="col-12 col-md-6" id="colForm">
+  <div class="col-12 col-md-6 mx-auto" id="colForm">
     <div class="card border-primary">
       <div class="card-header bg-white">
         <a href="<?= BASEURL . '/home/login' ?>" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Login</a>
@@ -31,42 +31,59 @@
   $('#myForm').on('submit', (e) => {
     e.preventDefault();
 
-    if($('#password').val().length < 6) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Minimal password 6 karakter !',
-        showConfirmButton: true,
-      });
-    } else if($('#confirmPassword').val() !== $('#password').val()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Konfirmasi password tidak sesuai !',
-        showConfirmButton: true,
-      });
-    } else {
-      $.ajax({
-        url: '<?= BASEURL . "/users/create" ?>',
-        type: 'POST',
-        data: $('#myForm').serialize(),
-        success: function(res) {
-          if(res == 'success') {
-            Swal.fire({
-              icon: 'success',
-              title: 'Berhasil membuat user',
-              showConfirmButton: true,
-            }).then(() => {
-              window.location = '<?= BASEURL . "/users" ?>'
-            });
-          } else {
+    $.ajax({
+      url: '<?= BASEURL . "/users/cekUsernameExist" ?>',
+      type: 'POST',
+      data: $('#myForm').serialize(),
+      success: function(res) {
+        if(res == 'success') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Maaf, username sudah digunakan !',
+            text: 'Silahkan gunakan username lain ..',
+            showConfirmButton: true,
+          })
+        } else {
+          if($('#password').val().length < 6) {
             Swal.fire({
               icon: 'error',
-              title: 'Gagal membuat user !',
-              text: res,
+              title: 'Minimal password 6 karakter !',
               showConfirmButton: true,
-            })
+            });
+          } else if($('#confirmPassword').val() !== $('#password').val()) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Konfirmasi password tidak sesuai !',
+              showConfirmButton: true,
+            });
+          } else {
+            $.ajax({
+              url: '<?= BASEURL . "/users/create" ?>',
+              type: 'POST',
+              data: $('#myForm').serialize(),
+              success: function(res) {
+                if(res == 'success') {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil membuat user',
+                    text: 'Silahkan login untuk mulai mencatat keuangan mu ...',
+                    showConfirmButton: true,
+                  }).then(() => {
+                    window.location = '<?= BASEURL . "/home/login" ?>'
+                  });
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal membuat user !',
+                    text: res,
+                    showConfirmButton: true,
+                  })
+                }
+              }
+            });
           }
         }
-      });
-    }
+      }
+    });
   });
 </script>

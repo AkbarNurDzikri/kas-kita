@@ -2,11 +2,15 @@
 
 class Kas_kita extends Controller {
   public function index() {
-    $data = [
-      'kasMasuk' => $this->model('kas_kita_model')->getPemasukanAll(),
-      'kasKeluar' => $this->model('kas_kita_model')->getPengeluaranAll(),
-    ];
-    $this->view('kas-kita/dashboard', $data);
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/home');
+    } else {
+      $data = [
+        'kasMasuk' => $this->model('kas_kita_model')->getPemasukanAll(),
+        'kasKeluar' => $this->model('kas_kita_model')->getPengeluaranAll(),
+      ];
+      $this->view('kas-kita/dashboard', $data);
+    }
   }
 
   public function pengeluaranAjax() {
@@ -125,11 +129,15 @@ class Kas_kita extends Controller {
   }
 
   public function edit_kas($id) {
-    $data = [
-      'kas' => $this->model('kas_kita_model')->getDataById($id),
-    ];
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/home');
+    } else {
+      $data = [
+        'kas' => $this->model('kas_kita_model')->getDataById($id),
+      ];
 
-    $this->view('kas-kita/edit-kas', $data);
+      $this->view('kas-kita/edit-kas', $data);
+    }
   }
 
   public function update_kas() {
