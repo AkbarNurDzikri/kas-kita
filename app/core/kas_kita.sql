@@ -12,13 +12,16 @@ CREATE TABLE `anggaran`(
 
 CREATE TABLE `kas_kita`(
   `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
   `tanggal` DATE NOT NULL,
   `kategori` ENUM('Gaji', 'Hutang', 'Sandang', 'Pangan', 'Papan', 'Pendidikan', 'Transportasi', 'Komunikasi', 'Jajan', 'Kebutuhan Bulanan', 'Kesehatan', 'Lainnya') NOT NULL,
   `keterangan` VARCHAR(255) NOT NULL,
   `pemasukan` INT NULL,
   `pengeluaran` INT NULL,
   `created_at` DATETIME NOT NULL,
-  `updated_at` DATETIME NULL
+  `updated_at` DATETIME NULL,
+
+  FOREIGN KEY(`user_id`) REFERENCES users(`id`)
 );
 
 CREATE TABLE `users`(

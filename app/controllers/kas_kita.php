@@ -9,7 +9,9 @@ class Kas_kita extends Controller {
         'kasMasuk' => $this->model('kas_kita_model')->getPemasukanAll(),
         'kasKeluar' => $this->model('kas_kita_model')->getPengeluaranAll(),
       ];
+      $this->view('kas-kita/header');
       $this->view('kas-kita/dashboard', $data);
+      $this->view('kas-kita/footer');
     }
   }
 
@@ -18,7 +20,8 @@ class Kas_kita extends Controller {
       0 => 'tanggal',
       1 => 'kategori',
       2 => 'keterangan',
-      3 => 'pengeluaran',
+      3 => 'pemasukan',
+      4 => 'pengeluaran',
     ];
 
     $queryCount = $this->model('kas_kita_model')->getPengeluaranAjax();
@@ -71,6 +74,7 @@ class Kas_kita extends Controller {
       1 => 'kategori',
       2 => 'keterangan',
       3 => 'pemasukan',
+      4 => 'pengeluaran',
     ];
 
     $queryCount = $this->model('kas_kita_model')->getPemasukanAjax();
@@ -136,7 +140,9 @@ class Kas_kita extends Controller {
         'kas' => $this->model('kas_kita_model')->getDataById($id),
       ];
 
+      $this->view('kas-kita/header');
       $this->view('kas-kita/edit-kas', $data);
+      $this->view('kas-kita/footer');
     }
   }
 

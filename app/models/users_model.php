@@ -30,7 +30,7 @@ class Users_model
 	}
 
 	public function getDataByUsername($username) {
-		$this->db->query("SELECT username, password FROM users WHERE username = :username");
+		$this->db->query("SELECT username, password, id FROM users WHERE username = :username");
 		$this->db->bind('username', $username);
 		return $this->db->single();
 	}

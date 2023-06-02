@@ -34,7 +34,7 @@ class Auth extends Controller {
       session_unset();
       session_destroy();
 
-      header('Location: ' . BASEURL . '/home/login');
+      header('Location: ' . BASEURL . '/home');
     }
   }
 }
