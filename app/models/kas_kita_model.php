@@ -130,12 +130,14 @@ class Kas_kita_model
 	// end coding
 
 	public function getPemasukanAll() {
-		$this->db->query("SELECT SUM(`pemasukan`) AS total_pemasukan FROM kas_kita");
+		$this->db->query("SELECT SUM(`pemasukan`) AS total_pemasukan FROM kas_kita WHERE user_id = :userLogin");
+		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
 		return $this->db->resultSet();
 	}
 	
 	public function getPengeluaranAll() {
-		$this->db->query("SELECT SUM(`pengeluaran`) AS total_pengeluaran FROM kas_kita");
+		$this->db->query("SELECT SUM(`pengeluaran`) AS total_pengeluaran FROM kas_kita WHERE user_id = :userLogin");
+		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
 		return $this->db->resultSet();
 	}
 
