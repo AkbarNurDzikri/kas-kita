@@ -30,7 +30,7 @@ class Categories extends Controller {
 
   public function update() {
     try {
-      $duplicateFound = $this->model('kategori_model')->getExistCategory($_POST['nama_kategori_edit']);
+      $duplicateFound = $this->model('kategori_model')->getExistCategory($_POST);
       if($duplicateFound) {
         echo 'is duplicate';
       } else {

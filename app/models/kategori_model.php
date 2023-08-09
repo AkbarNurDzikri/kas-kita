@@ -32,8 +32,8 @@ class Kategori_model
 	public function getExistCategory($data) {
 		$this->db->query("SELECT * FROM categories WHERE user_id = :userLogin AND nama_kategori = :kategoriNama AND jenis_kategori = :jenisKategori");
 		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		$this->db->bind('kategoriNama', $data['nama_kategori']);
-		$this->db->bind('jenisKategori', $data['jenis_kategori']);
+		$this->db->bind('kategoriNama', isset($data['nama_kategori']) ? $data['nama_kategori'] : $data['nama_kategori_edit']);
+		$this->db->bind('jenisKategori', isset($data['jenis_kategori']) ? $data['jenis_kategori'] : $data['pilih_kategori']);
 		return $this->db->single();
 	}
 
