@@ -8,65 +8,45 @@ class Kas_kita_model
 		$this->db = new Database;
 	}
 
-	// ajax pengeluaran datatables
-	public function getPengeluaranAjax() {
-		$this->db->query("SELECT COUNT(kas_kita.id) AS data_rows FROM kas_kita INNER JOIN users ON users.id = kas_kita.user_id WHERE pemasukan IS NULL AND kas_kita.user_id = :userLogin");
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
+	public function getKasKeluarByFilter($data) {
+		$this->db->query("SELECT * FROM kas_kita AS kas WHERE kas.user_id = :userId AND kas.kategori = :namaKategori AND kas.tanggal BETWEEN :mulai AND :sampai AND kas.pemasukan IS NULL ORDER BY kas.tanggal DESC");
+
+
+		$this->db->bind('userId', $_SESSION['userInfo']['id']);
+		$this->db->bind('namaKategori', $data['nama_kategori_filter']);
+		$this->db->bind('mulai', $data['pengeluaran_mulai']);
+		$this->db->bind('sampai', $data['pengeluaran_sampai']);
 		return $this->db->resultSet();
 	}
 
-	public function setPengeluaranOutput($order, $dir, $limit, $start) {
-		$this->db->query("SELECT k.*, u.username FROM kas_kita AS k INNER JOIN users AS u ON u.id = k.user_id WHERE pemasukan IS NULL AND k.user_id = :userLogin ORDER BY $order $dir LIMIT $limit OFFSET $start");
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
+	public function getKasKeluarAll($data) {
+		$this->db->query("SELECT * FROM kas_kita AS kas WHERE kas.user_id = :userId AND kas.pemasukan IS NULL AND kas.tanggal BETWEEN :mulai AND :sampai ORDER BY kas.tanggal DESC");
+
+		$this->db->bind('userId', $_SESSION['userInfo']['id']);
+		$this->db->bind('mulai', $data['pengeluaran_mulai']);
+		$this->db->bind('sampai', $data['pengeluaran_sampai']);
 		return $this->db->resultSet();
 	}
 
-	public function getPengeluaranSearch($order, $dir, $limit, $start, $keyword) {
-		$this->db->query("SELECT k.* FROM kas_kita AS k INNER JOIN users AS u ON u.id = k.user_id WHERE k.user_id = :userLogin AND pemasukan IS NULL AND keterangan LIKE :keyword ORDER BY $order $dir LIMIT $limit OFFSET $start");
+	public function getKasMasukByFilter($data) {
+		$this->db->query("SELECT * FROM kas_kita AS kas WHERE kas.user_id = :userId AND kas.kategori = :namaKategori AND kas.tanggal BETWEEN :mulai AND :sampai AND kas.pengeluaran IS NULL ORDER BY kas.tanggal DESC");
 
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		$this->db->bind('keyword',"%$keyword%");
+
+		$this->db->bind('userId', $_SESSION['userInfo']['id']);
+		$this->db->bind('namaKategori', $data['nama_kategori_filter_pemasukan']);
+		$this->db->bind('mulai', $data['pemasukan_mulai']);
+		$this->db->bind('sampai', $data['pemasukan_sampai']);
 		return $this->db->resultSet();
 	}
 
-	public function getPengeluaranSearchLength($keyword) {
-		$this->db->query("SELECT COUNT(kas_kita.id) AS data_rows FROM kas_kita INNER JOIN users ON users.id = kas_kita.user_id WHERE kas_kita.user_id = :userLogin AND pemasukan IS NULL AND keterangan LIKE :keyword");
+	public function getKasMasukAll($data) {
+		$this->db->query("SELECT * FROM kas_kita AS kas WHERE kas.user_id = :userId AND kas.pengeluaran IS NULL AND kas.tanggal BETWEEN :mulai AND :sampai ORDER BY kas.tanggal DESC");
 
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		$this->db->bind('keyword',"%$keyword%");
+		$this->db->bind('userId', $_SESSION['userInfo']['id']);
+		$this->db->bind('mulai', $data['pemasukan_mulai']);
+		$this->db->bind('sampai', $data['pemasukan_sampai']);
 		return $this->db->resultSet();
 	}
-	// ajax pengeluaran datatables
-
-	// ajax pemasukan datatables
-	public function getPemasukanAjax() {
-		$this->db->query("SELECT COUNT(kas_kita.id) AS data_rows FROM kas_kita INNER JOIN users ON users.id = kas_kita.user_id WHERE pengeluaran IS NULL AND kas_kita.user_id = :userLogin");
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		return $this->db->resultSet();
-	}
-
-	public function setPemasukanOutput($order, $dir, $limit, $start) {
-		$this->db->query("SELECT k.* FROM kas_kita AS k INNER JOIN users AS u ON u.id = k.user_id WHERE pengeluaran IS NULL AND k.user_id = :userLogin ORDER BY $order $dir LIMIT $limit OFFSET $start");
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		return $this->db->resultSet();
-	}
-
-	public function getPemasukanSearch($order, $dir, $limit, $start, $keyword) {
-		$this->db->query("SELECT k.* FROM kas_kita AS k INNER JOIN users AS u ON u.id = k.user_id WHERE k.user_id = :userLogin AND pengeluaran IS NULL AND keterangan LIKE :keyword ORDER BY $order $dir LIMIT $limit OFFSET $start");
-
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		$this->db->bind('keyword', "%$keyword%");
-		return $this->db->resultSet();
-	}
-
-	public function getPemasukanSearchLength($keyword) {
-		$this->db->query("SELECT COUNT(kas_kita.id) AS data_rows FROM kas_kita INNER JOIN users ON users.id = kas_kita.user_id WHERE kas_kita.user_id = :userLogin AND pengeluaran IS NULL AND keterangan LIKE :keyword");
-
-		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
-		$this->db->bind('keyword', "%$keyword%");
-		return $this->db->resultSet();
-	}
-	// ajax pemasukan datatables
 
 	public function createKas($data) {
 		$query = "INSERT INTO kas_kita VALUES (NULL, :user_id, :tanggal, :kategori, :keterangan, :pemasukan, :pengeluaran, :created_at, :updated_at)";
@@ -76,8 +56,8 @@ class Kas_kita_model
 		$this->db->bind('tanggal', $data['tanggal']);
 		$this->db->bind('kategori', $data['kategori']);
 		$this->db->bind('keterangan', $data['keterangan']);
-		$this->db->bind('pemasukan', $data['arusKas'] == 'Kas Masuk' ? $data['jumlah'] : NULL);
-		$this->db->bind('pengeluaran', $data['arusKas'] == 'Kas Keluar' ? $data['jumlah'] : NULL);
+		$this->db->bind('pemasukan', $data['arusKas'] == 'Pemasukan' ? $data['jumlah'] : NULL);
+		$this->db->bind('pengeluaran', $data['arusKas'] == 'Pengeluaran' ? $data['jumlah'] : NULL);
 		$this->db->bind('created_at', date('Y-m-d H:i:s'));
 		$this->db->bind('updated_at', NULL);
 
@@ -108,8 +88,8 @@ class Kas_kita_model
 		$this->db->bind('tanggal', $data['tanggal']);
 		$this->db->bind('kategori', $data['kategori']);
 		$this->db->bind('keterangan', $data['keterangan']);
-		$this->db->bind('pemasukan', $data['arusKas'] == 'Kas Masuk' ? $data['jumlah'] : NULL);
-		$this->db->bind('pengeluaran', $data['arusKas'] == 'Kas Keluar' ? $data['jumlah'] : NULL);
+		$this->db->bind('pemasukan', $data['arusKas'] == 'Pemasukan' ? $data['jumlah'] : NULL);
+		$this->db->bind('pengeluaran', $data['arusKas'] == 'Pengeluaran' ? $data['jumlah'] : NULL);
 		$this->db->bind('updated_at', date('Y-m-d H:i:s'));
 		$this->db->bind('id', $data['id']);
 

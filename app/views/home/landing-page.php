@@ -11,11 +11,11 @@
   </div>
 </div>
 
-<div class="row bg-warning" style="height: 10px;" data-aos="zoom-in" data-aos-duration="1500"></div>
+<div class="row bg-warning" style="height: 10px;"></div>
 
 <div class="row text-center" style="margin-top: -23px;">
   <div class="col">
-    <a href="<?= BASEURL . '/home/daftar' ?>" class="btn btn-primary ps-5 pe-5 mb-2" data-aos="zoom-in" data-aos-duration="1500">Buat Akun</a>
+    <a href="<?= BASEURL . '/home/daftar' ?>" class="btn btn-primary ps-5 pe-5 mb-2">Buat Akun</a>
     <p><a href="<?= BASEURL . '/home/login' ?>" class="text-primary text-decoration-none">Login</a></p>
   </div>
 </div>

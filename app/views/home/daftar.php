@@ -1,9 +1,6 @@
-<div class="row my-3">
+<div class="row mt-3 mb-5">
   <div class="col-12 col-md-6 mx-auto" id="colForm">
     <div class="card border-primary">
-      <div class="card-header bg-white">
-        <a href="<?= BASEURL . '/home/login' ?>" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Login</a>
-      </div>
       <div class="card-body">
         <h1 class="card-title text-center text-primary font-primary" style="font-size: 35px; margin-bottom: -10px;">Kas Kita</h1>
         <p class="text-center text-primary text-muted" style="font-size: 30px;">Buat Akun</p>
@@ -20,6 +17,7 @@
           <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
           <input type="password" class="form-control mb-3" id="confirmPassword" name="confirmPassword" required>
 
+          <a href="<?= BASEURL . '/home/login' ?>" class="btn btn-secondary btn-sm float-end ms-1"><i class="bi bi-box-arrow-in-right"></i> Login</a>
           <button type="submit" class="btn btn-primary btn-sm float-end btnSave"><i class="bi bi-sd-card"></i> Daftar</button>
         </form>
       </div>

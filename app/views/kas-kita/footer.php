@@ -1,7 +1,7 @@
   </div>
     <div class="row text-center mt-3">
       <div class="col">
-        <p class="small text-muted">Copyright &copy 2023 Khalid System All Right Reserved</p>
+        <p class="small text-muted">Copyright &copy 2023 Khalid Systems All Right Reserved</p>
       </div>
     </div>
 

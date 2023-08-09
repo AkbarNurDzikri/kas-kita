@@ -1,6 +1,6 @@
     <div class="row text-center">
       <div class="col">
-        <p class="small fixed-bottom">Copyright &copy 2023 Khalid System All Right Reserved</p>
+        <p class="small fixed-bottom text-muted">Copyright &copy 2023 Khalid System All Right Reserved</p>
       </div>
     </div>
     
