@@ -411,46 +411,45 @@
       type: 'POST',
       data: $('#formKategori').serialize(),
       success: function(res) {
-        // if(res == 'success') {
-        //   Swal.fire({
-        //     icon: 'success',
-        //     title: 'Berhasil menambah kategori baru',
-        //     showConfirmButton: true,
-        //   }).then(() => {
-        //     $('#buatKategori').modal('hide');
-        //     $('#nama_kategori').val('');
+        if(res == 'success') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil menambah kategori baru',
+            showConfirmButton: true,
+          }).then(() => {
+            $('#buatKategori').modal('hide');
+            $('#nama_kategori').val('');
 
-        //     $('#kategori').empty();
-        //     $('#kategori').append(new Option('Pilih Kategori', ''));
+            $('#kategori').empty();
+            $('#kategori').append(new Option('Pilih Kategori', ''));
 
-        //     $.ajax({
-        //       url: '<?= BASEURL . "/categories/getCategories" ?>',
-        //       type: 'POST',
-        //       data: 'jenis_kategori=' + $('#arusKas').find(':selected').val(),
-        //       success: function(res) {
-        //         const categories = JSON.parse(res);
+            $.ajax({
+              url: '<?= BASEURL . "/categories/getCategories" ?>',
+              type: 'POST',
+              data: 'jenis_kategori=' + $('#arusKas').find(':selected').val(),
+              success: function(res) {
+                const categories = JSON.parse(res);
 
-        //         $('#kategori').empty();
-        //         $('#kategori').append(new Option('Pilih Kategori', ''));
+                $('#kategori').empty();
+                $('#kategori').append(new Option('Pilih Kategori', ''));
                 
-        //         for(category of categories) {
-        //           $('#kategori').append(new Option(category.nama_kategori, category.nama_kategori));
-        //         }
+                for(category of categories) {
+                  $('#kategori').append(new Option(category.nama_kategori, category.nama_kategori));
+                }
 
-        //         $('#kategori').append(new Option('--Tambah Kategori--', '+ Kategori'));
-        //         $('#kategori').append(new Option('--Edit Kategori--', 'Edit Kategori'));
-        //       }
-        //     });
-        //   });
-        // } else {
-        //   Swal.fire({
-        //     icon: 'error',
-        //     title: 'Harus unik !',
-        //     html: 'Nama kategori <b>"' + $('#nama_kategori').val() + '"</b> sudah ada !',
-        //     showConfirmButton: true,
-        //   });
-        // }
-        console.log(res)
+                $('#kategori').append(new Option('--Tambah Kategori--', '+ Kategori'));
+                $('#kategori').append(new Option('--Edit Kategori--', 'Edit Kategori'));
+              }
+            });
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Harus unik !',
+            html: 'Nama kategori <b>"' + $('#nama_kategori').val() + '"</b> sudah ada !',
+            showConfirmButton: true,
+          });
+        }
       }
     });
   });
@@ -465,53 +464,52 @@
       type: 'POST',
       data: $('#formEditKategori').serialize(),
       success: function(res) {
-        // if(res == 'success') {
-        //   Swal.fire({
-        //     icon: 'success',
-        //     title: 'Berhasil merubah kategori',
-        //     showConfirmButton: true,
-        //   }).then(() => {
-        //     $('#editKategori').modal('hide');
-        //     $('#nama_kategori').val('');
+        if(res == 'success') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil merubah kategori',
+            showConfirmButton: true,
+          }).then(() => {
+            $('#editKategori').modal('hide');
+            $('#nama_kategori').val('');
 
-        //     $('#kategori').empty();
-        //     $('#kategori').append(new Option('Pilih Kategori', ''));
+            $('#kategori').empty();
+            $('#kategori').append(new Option('Pilih Kategori', ''));
 
-        //     $.ajax({
-        //       url: '<?= BASEURL . "/categories/getCategories" ?>',
-        //       type: 'POST',
-        //       data: 'jenis_kategori=' + $('#arusKas').find(':selected').val(),
-        //       success: function(res) {
-        //         const categories = JSON.parse(res);
+            $.ajax({
+              url: '<?= BASEURL . "/categories/getCategories" ?>',
+              type: 'POST',
+              data: 'jenis_kategori=' + $('#arusKas').find(':selected').val(),
+              success: function(res) {
+                const categories = JSON.parse(res);
 
-        //         $('#kategori').empty();
-        //         $('#kategori').append(new Option('Pilih Kategori', ''));
+                $('#kategori').empty();
+                $('#kategori').append(new Option('Pilih Kategori', ''));
                 
-        //         for(category of categories) {
-        //           $('#kategori').append(new Option(category.nama_kategori, category.nama_kategori));
-        //         }
+                for(category of categories) {
+                  $('#kategori').append(new Option(category.nama_kategori, category.nama_kategori));
+                }
 
-        //         $('#kategori').append(new Option('--Tambah Kategori--', '+ Kategori'));
-        //         $('#kategori').append(new Option('--Edit Kategori--', 'Edit Kategori'));
-        //       }
-        //     });
-        //   });
-        // } else if(res == 'is duplicate') {
-        //   Swal.fire({
-        //     icon: 'error',
-        //     title: 'Harus unik !',
-        //     html: 'Nama kategori <b>"' + $('#nama_kategori_edit').val() + '"</b> sudah ada !',
-        //     showConfirmButton: true,
-        //   });
-        // } else {
-        //   Swal.fire({
-        //     icon: 'error',
-        //     title: 'Terjadi Kesalahan',
-        //     html: '<p><b>Kode Kesalahan :</b></p> <p>'+res+'</p>',
-        //     showConfirmButton: true,
-        //   });
-        // }
-        console.log(res)
+                $('#kategori').append(new Option('--Tambah Kategori--', '+ Kategori'));
+                $('#kategori').append(new Option('--Edit Kategori--', 'Edit Kategori'));
+              }
+            });
+          });
+        } else if(res == 'is duplicate') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Harus unik !',
+            html: 'Nama kategori <b>"' + $('#nama_kategori_edit').val() + '"</b> sudah ada !',
+            showConfirmButton: true,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Terjadi Kesalahan',
+            html: '<p><b>Kode Kesalahan :</b></p> <p>'+res+'</p>',
+            showConfirmButton: true,
+          });
+        }
       }
     });
   });
@@ -624,6 +622,20 @@
           '<span class="text-primary">Total Kas Masuk</span> : <b class="text-primary">' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasMasuk) + '</b> | ' +
           '<span class="text-danger">Total Kas Keluar</span> : <b class="text-danger">' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasKeluar) + '</b> | ' +
           'Sisa Saldo : <b>' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasMasuk - totalKasKeluar) + '</b>');
+
+        Swal.fire({
+          title: 'Download laporan?',
+          text: 'Klik OK untuk men-download laporan',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Gak deh',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const params = new Array($('#tglMulaiLaporan').val(), $('#tglSelesaiLaporan').val());
+            location.href = '<?= BASEURL . "/kas_kita/export/" ?>' + params;
+          }
+        })
       }
     });
 

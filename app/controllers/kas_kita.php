@@ -99,4 +99,23 @@ class Kas_kita extends Controller {
 
     echo json_encode($data);
   }
+
+  public function export($dates) {
+    if(!isset($_SESSION['userInfo'])) {
+      header('Location: ' . BASEURL . '/home');
+    } else {
+      $params = explode(",", $dates);
+      $args = [
+        'tglMulaiLaporan' => $params[0],
+        'tglSelesaiLaporan' => $params[1],
+      ];
+
+      $data = [
+        'kas' => $this->model('kas_kita_model')->getKasAll($args),
+        'tanggalLaporan' => $args
+      ];
+
+      $this->view('kas-kita/export-pdf', $data);
+    }
+  }
 }
