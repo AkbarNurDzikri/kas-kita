@@ -620,7 +620,7 @@
         $('.textSaldo').html('<b>Laporan Kas Periode ' + new Date($('#tglMulaiLaporan').val()).toLocaleDateString("id", {day: "numeric", month: "long", year: "numeric"}) +
           ' - ' + new Date($('#tglSelesaiLaporan').val()).toLocaleDateString("id", {day: "numeric", month: "long", year: "numeric"}) + '</b> <br>' +
           '<span class="text-primary">Total Kas Masuk</span> : <b class="text-primary">' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasMasuk) + '</b> | ' +
-          '<span class="text-danger">Total Kas Keluar</span> : <b class="text-danger">' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasKeluar) + '</b> | ' +
+          '<span class="text-danger">Total Kas Keluar</span> : <b class="text-danger">' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasKeluar) + '</b> <br>' +
           'Sisa Saldo : <b>' + new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(totalKasMasuk - totalKasKeluar) + '</b>');
 
         Swal.fire({

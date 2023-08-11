@@ -9,21 +9,21 @@ class Kategori_model
 	}
 
 	public function getCategories($jenisKategori) {
-		$this->db->query("SELECT id, nama_kategori FROM categories WHERE user_id = :userLogin AND jenis_kategori = :jenisKategori");
+		$this->db->query("SELECT id, nama_kategori FROM categories WHERE user_id = :userLogin AND jenis_kategori = :jenisKategori ORDER BY nama_kategori ASC");
 		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
 		$this->db->bind('jenisKategori', $jenisKategori);
 		return $this->db->resultSet();
 	}
 
 	public function getCategoriesOut() {
-		$this->db->query("SELECT id, nama_kategori FROM categories WHERE user_id = :userLogin AND jenis_kategori = :jenisKategori");
+		$this->db->query("SELECT id, nama_kategori FROM categories WHERE user_id = :userLogin AND jenis_kategori = :jenisKategori ORDER BY nama_kategori ASC");
 		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
 		$this->db->bind('jenisKategori', 'Pengeluaran');
 		return $this->db->resultSet();
 	}
 
 	public function getCategoriesIn() {
-		$this->db->query("SELECT id, nama_kategori FROM categories WHERE user_id = :userLogin AND jenis_kategori = :jenisKategori");
+		$this->db->query("SELECT id, nama_kategori FROM categories WHERE user_id = :userLogin AND jenis_kategori = :jenisKategori ORDER BY nama_kategori ASC");
 		$this->db->bind('userLogin', $_SESSION['userInfo']['id']);
 		$this->db->bind('jenisKategori', 'Pemasukan');
 		return $this->db->resultSet();
